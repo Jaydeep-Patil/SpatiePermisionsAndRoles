@@ -27,6 +27,38 @@
                 </div>
                 <!--  -->
 
+                <!-- Role Permissions -->
+                <div class="mt-6 p-2">
+                    <h2 class="text-2xl font-semibold">Role Permissions</h2>
+                    <div class="mt-4 p-2">
+                    @if($role->permissions)
+                        @foreach ($role->permissions as $role_permission)
+                        <span>{{ $role_permission->name  }}</span>
+                        @endforeach
+                    @endif
+                    </div>
+                    <!-- set permission -->
+                    <div class="max-w-xl">
+                    <form method="POST" action="{{ route('admin.roles.permissions', $role) }}" >
+                        @csrf
+                        <div class="form-group mb-6" >
+                            <label for="permission" class="block text-sm font-medium text-gray-700">Select Permission</label>
+                            <select id="permission" name="permission" autocomplete="permission" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value>Select Permission</option>
+                                @foreach($permissions as $permisson)
+                                <option value="{{ $permisson->name }}">{{ $permisson->name }}</option>
+                                @endforeach
+                            </select>    
+                        @error('name') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group mb-6">
+                            <button type="submit" class="px-4 py-2 bg-green-500 hover:bg-green-700 hover:text-white rounded-md" >Add Permission</button>
+                        </div>
+                    </form>
+                    </div>
+                    <!-- /.end Set permission -->
+                </div>
+                <!-- End Role Permissions -->
             </div>
         </div>
     </div>
