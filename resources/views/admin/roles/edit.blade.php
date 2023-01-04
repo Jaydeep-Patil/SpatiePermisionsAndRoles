@@ -33,7 +33,13 @@
                     <div class="mt-4 p-2">
                     @if($role->permissions)
                         @foreach ($role->permissions as $role_permission)
-                        <span>{{ $role_permission->name  }}</span>
+                            <form method="POST" action="{{ route('admin.roles.revokePermission', $role->id) }}" onsubmit="return confirm('Are you sure to delete {{  $role_permission->name }} Permission?')">
+                                @CSRF
+                                @method('delete')
+                                <button type="submit" class="material-icons-round text-base" >
+                                {{ $role_permission->name }}
+                                </button>
+                            </form>
                         @endforeach
                     @endif
                     </div>
